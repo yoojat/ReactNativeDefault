@@ -11,9 +11,12 @@ import {
 } from '@react-navigation/native';
 import Tabs from './navigation/Tabs';
 import Stack from './navigation/Stack';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Root from './navigation/Root';
 import { ThemeProvider } from 'styled-components/native';
 import { darkTheme, lightTheme } from './styled';
+
+const queryClient = new QueryClient();
 
 // promise map을 이용한 방법
 // const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
@@ -70,15 +73,17 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-      <NavigationContainer
-      // theme={isDark ? DarkTheme : DefaultTheme} => DarkTheme, DefaultTheme을 사용하는 방법
-      >
-        <Root />
-        {/* <Tabs /> */}
-        {/* <Stack /> */}
-      </NavigationContainer>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <NavigationContainer
+        // theme={isDark ? DarkTheme : DefaultTheme} => DarkTheme, DefaultTheme을 사용하는 방법
+        >
+          <Root />
+          {/* <Tabs /> */}
+          {/* <Stack /> */}
+        </NavigationContainer>
+      </ThemeProvider>
+    </QueryClientProvider>
 
     // <View onLayout={onLayoutRootView}>
     //   <Text>We are done loading111명준 !</Text>

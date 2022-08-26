@@ -12,7 +12,12 @@ const Tabs = () => {
   const isDark = useColorScheme() === 'dark';
   return (
     <Tab.Navigator
+      sceneContainerStyle={{
+        backgroundColor: isDark ? BLACK_COLOR : 'white',
+      }}
       screenOptions={{
+        tabBarHideOnKeyboard: true, // Android 의 경우, 키보드 입력 시 Bottom Tab 이 사라지지 않고 키보드 위로 밀려 올라오는 현상 해결
+        // unmountOnBlur: true,
         tabBarStyle: { backgroundColor: isDark ? BLACK_COLOR : 'white' },
         tabBarActiveTintColor: isDark ? YELLOW_COLOR : BLACK_COLOR,
         tabBarInactiveTintColor: isDark ? DARK_GREY : LIGHT_GREY,
